@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        dockerfile: ./base-image/java/openjdk/11/Dockerfile
     - name: Build the Docker image
-      run: docker build . --file ./base-image/java/openjdk/11/Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
