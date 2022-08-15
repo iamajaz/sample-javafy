@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        context: "{{defaultContext}}:base-image/java/openjdk/11/Dockerfile"
+        context: "./base-image/java/openjdk/11/Dockerfile"
     - name: Build the Docker image
-      run: docker build . --file {context}/Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file ./base-image/java/openjdk/11/Dockerfile --tag my-image-name:$(date +%s)
