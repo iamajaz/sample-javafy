@@ -15,7 +15,7 @@ RUN wget -O /opt/dd-java-agent.jar https://repo1.maven.org/maven2/com/datadoghq/
 
 USER root
 
-COPY ./entrypoint.sh /entrypoint.sh
+COPY ./base-image/java/openjdk/11/entrypoint.sh /entrypoint.sh
 RUN chmod a+x /*.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
