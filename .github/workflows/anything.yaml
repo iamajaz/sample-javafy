@@ -31,7 +31,7 @@ jobs:
           echo "Random 2 part 2"
   second-random-job:
     runs-on: ubuntu-latest
-    #needs: ['first-random-job']
+    needs: ['first-random-job']
     steps:
       - name: Second Job random thing 1
         shell: python
