@@ -7,11 +7,16 @@ on:
     branches: [ "dev" ]
 
 jobs:
+    branches: dev
+  # run it during pull request
+#   pull_request:
 
-  build:
-
+jobs:
+  build-and-push-docker-image:
+    name: Build Docker image and push to repositories
+    # run only when code is compiling and tests are passing
     runs-on: ubuntu-latest
-
+  build:
     steps:
     - uses: actions/checkout@v3
       with:

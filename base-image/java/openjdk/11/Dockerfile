@@ -1,6 +1,8 @@
 ARG openjdk_version=11.0.15
 ARG dd_version=0.102.0
 
+# Commentted line nothing else
+
 FROM openjdk:${openjdk_version}-jdk-slim
 
 # Refreshing ARGs lost after FROM statement
