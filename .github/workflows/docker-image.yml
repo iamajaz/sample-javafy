@@ -1,40 +1,20 @@
-name: Build and Publish
+name: Docker Image CI
 
 on:
-  # run it on push to the default repository branch
   push:
-    branches: [main]
-  # run it during pull request
+    branches: [ "dev" ]
   pull_request:
+    branches: [ "dev" ]
 
-defaults:
-  # define job to build and publish docker image
-  build-and-push-docker-image:
-    name: Build Docker image and push to repositories
-    # run only when code is compiling and tests are passing
+jobs:
+
+  build:
+
     runs-on: ubuntu-latest
 
-    # steps to perform in job
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # setup Docker buld action
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1
-      
-      - name: Build image and push to Docker Hub and GitHub Container Registry
-        uses: docker/build-push-action@v2
-        with:
-          # relative path to the place where source code with Dockerfile is located
-          context: ./base-image/java/openjdk/11/Dockerfile
-          # Note: tags has to be all lower-case
-          tags: |
-            oskardudycz/eventsourcing.nodejs.simple:latest 
-            ghcr.io/oskardudycz/eventsourcing.nodejs/simple:latest
-          # build on feature branches, push only on main branch
-#           push: ${{ github.ref == 'refs/heads/main' }}
-
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+    - uses: actions/checkout@v3
+      with:
+        context: "./base-image/java/openjdk/11/Dockerfile"
+    - name: Build the Docker image
+      run: docker build . --file ./base-image/java/openjdk/11/Dockerfile --tag my-image-name:$(date +%s)
